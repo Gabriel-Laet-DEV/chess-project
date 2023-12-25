@@ -2,7 +2,6 @@ package boardgame;
 
 import boardgame.exceptions.BoardException;
 import boardgame.exceptions.PositionNotFoundException;
-import javafx.geometry.Pos;
 
 public class Board {
 

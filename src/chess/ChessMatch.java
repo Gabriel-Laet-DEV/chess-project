@@ -1,10 +1,9 @@
 package chess;
 
 import boardgame.Board;
-import boardgame.Piece;
-import boardgame.Position;
 import boardgame.exceptions.BoardException;
 import boardgame.exceptions.PositionNotFoundException;
+import chess.exceptions.ChessException;
 import chess.pieces.King;
 import chess.pieces.Rook;
 
@@ -12,7 +11,7 @@ public class ChessMatch {
 
     private Board board;
 
-    public ChessMatch() throws BoardException, PositionNotFoundException {
+    public ChessMatch() throws BoardException, PositionNotFoundException, ChessException {
         board = new Board(8, 8);
         inicialSetup();
     }
@@ -27,9 +26,13 @@ public class ChessMatch {
         return mat;
     }
 
-    private void inicialSetup() throws BoardException, PositionNotFoundException {
-        board.placePiece(new Rook(board, Color.WHITE), new Position(2,1));
-        board.placePiece(new King(board, Color.BLACK), new Position(0, 4));
-        board.placePiece(new King(board, Color.WHITE), new Position(7, 4));
+    private void placeNewPeace(char column, int row, ChessPiece piece) throws ChessException, PositionNotFoundException, BoardException {
+        board.placePiece(piece, new ChessPosition(column, row).toPosition());
+    }
+
+    private void inicialSetup() throws BoardException, PositionNotFoundException, ChessException {
+        placeNewPeace('b', 6, new Rook(board, Color.WHITE));
+        placeNewPeace('e', 8, new King(board, Color.BLACK));
+        placeNewPeace('e', 1, new King(board, Color.WHITE));
     }
 }
