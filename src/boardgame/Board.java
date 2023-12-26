@@ -30,14 +30,14 @@ public class Board {
 
     public Piece piece(int row, int column) throws PositionNotFoundException {
         if(!positionExists(row, column)){
-            throw new PositionNotFoundException();
+            throw new PositionNotFoundException("Position not found to the board");
         }
         return pieces[row][column];
     }
 
     public Piece piece(Position position) throws PositionNotFoundException {
         if(!positionExists(position)){
-            throw new PositionNotFoundException();
+            throw new PositionNotFoundException("Position not found on the board");
         }
         return pieces[position.getRow()][position.getColumn()];
     }
@@ -48,6 +48,19 @@ public class Board {
         }
         pieces[position.getRow()][position.getColumn()] = piece;
         piece.position = position;
+    }
+
+    public Piece removePiece(Position position) throws PositionNotFoundException {
+        if(!positionExists(position)){
+            throw new PositionNotFoundException("Position not found on the board");
+        }
+        if(piece(position) == null){
+            return null;
+        }
+        Piece aux = piece(position);
+        aux.position = null;
+        pieces[position.getRow()][position.getColumn()] = null;
+        return aux;
     }
 
     private boolean positionExists(int row, int column){
