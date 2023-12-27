@@ -9,29 +9,23 @@ import chess.exceptions.ChessException;
 import chess.pieces.King;
 import chess.pieces.Rook;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChessMatch {
 
 
     private int turn;
     private Color currentPlayer;
 
-    public int getTurn() {
-        return turn;
-    }
-
-    private void setTurn(int turn) {
-        this.turn = turn;
-    }
+    private Board board;
+    private List<Piece> piecesOnTheBoard = new ArrayList<>();
+    private List<Piece> capturedPieces = new ArrayList<>();
 
     private void setCurrentPlayer(Color currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
-    public Color getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    private Board board;
 
     public ChessMatch() throws BoardException, PositionNotFoundException, ChessException {
         board = new Board(8, 8);
@@ -77,6 +71,11 @@ public class ChessMatch {
         Piece p = board.removePiece(source);
         Piece capturedPiece = board.removePiece(target);
         board.placePiece(p, target);
+
+        if(capturedPiece != null){
+            piecesOnTheBoard.remove(capturedPiece);
+            capturedPieces.add(capturedPiece);
+        }
         return capturedPiece;
     }
 
@@ -99,6 +98,19 @@ public class ChessMatch {
 
     private void placeNewPiece(char column, int row, ChessPiece piece) throws ChessException, PositionNotFoundException, BoardException {
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
+        piecesOnTheBoard.add(piece);
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    private void setTurn(int turn) {
+        this.turn = turn;
+    }
+
+    public Color getCurrentPlayer() {
+        return currentPlayer;
     }
 
 
