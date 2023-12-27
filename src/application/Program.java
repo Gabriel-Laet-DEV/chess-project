@@ -30,8 +30,9 @@ public class Program {
                 System.out.print("Target: ");
                 ChessPosition target = UI.readChessPosition(sc);
                 ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
-            }catch (PositionNotFoundException | BoardException e) {
+            }catch (PositionNotFoundException | BoardException | ChessException e) {
                 System.out.println(e.getMessage());
+                System.out.println("Aperta qualquer teclara para continuar");
                 sc.nextLine();
             }
         }

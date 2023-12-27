@@ -1,5 +1,7 @@
 package boardgame;
 
+import boardgame.exceptions.PositionNotFoundException;
+
 public abstract class Piece {
 
     protected Position position;
@@ -13,13 +15,13 @@ public abstract class Piece {
         return board;
     }
 
-    public abstract boolean[][] possibleMoves();
+    public abstract boolean[][] possibleMoves() throws PositionNotFoundException;
 
-    public boolean possibleMove(Position position){
+    public boolean possibleMove(Position position) throws PositionNotFoundException {
         return possibleMoves()[position.getRow()][position.getColumn()];
     }
 
-    public boolean isThereAnyPossibleMove(){
+    public boolean isThereAnyPossibleMove() throws PositionNotFoundException {
         boolean[][] mat = possibleMoves();
         for(int i = 0; i < mat.length; i++){
             for(int j = 0; j < mat.length; j++){

@@ -34,14 +34,14 @@ public class UI {
         System.out.flush();
     }
 
-    public static ChessPosition readChessPosition(Scanner sc){
+    public static ChessPosition readChessPosition(Scanner sc) throws ChessException {
         try {
             String s = sc.nextLine();
             char column = s.charAt(0);
             int row = Integer.parseInt(s.substring(1));
             return new ChessPosition(column, row);
         }catch(RuntimeException | ChessException e){
-            throw new InputMismatchException("Error reading position. Values are from a1 to h8");
+            throw new ChessException("Error reading position. Values are from a1 to h8");
         }
     }
 
