@@ -22,7 +22,7 @@ public class Program {
         while(true){
             try{
                 UI.clearScreen();
-                UI.printBoard(chessMatch.getPieces());
+                UI.printMatch(chessMatch);
                 System.out.println();
                 System.out.print("Source: ");
                 ChessPosition source = UI.readChessPosition(sc);
@@ -36,7 +36,7 @@ public class Program {
                 ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
             }catch (PositionNotFoundException | BoardException | ChessException e) {
                 System.out.println(e.getMessage());
-                System.out.println("Aperta qualquer teclara para continuar");
+                System.out.println("Press any key to continue");
                 sc.nextLine();
             }
         }
