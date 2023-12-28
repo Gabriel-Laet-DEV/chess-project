@@ -23,7 +23,7 @@ public class Program {
             System.out.println(e.getMessage());
         }
 
-        while(true){
+        while(!chessMatch.getCheckMate()){
             try{
                 UI.clearScreen();
                 UI.printMatch(chessMatch, captured);
@@ -46,6 +46,12 @@ public class Program {
                 System.out.println("Press any key to continue");
                 sc.nextLine();
             }
+        }
+        UI.clearScreen();
+        try {
+            UI.printMatch(chessMatch, captured);
+        } catch (PositionNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -7,9 +7,7 @@ import chess.ChessPosition;
 import chess.Color;
 import chess.exceptions.ChessException;
 
-import java.sql.ResultSet;
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -57,10 +55,18 @@ public class UI {
         printCapturedPieces(captured);
         System.out.println();
         System.out.println("Turn: " + chessMatch.getTurn());
-        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
-        if(chessMatch.getCheck()){
+        if(!chessMatch.getCheckMate()) {
+            System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+            if (chessMatch.getCheck()) {
+                System.out.print(ANSI_GREEN);
+                System.out.println("Check!");
+                System.out.print(ANSI_RESET);
+            }
+        }else {
+            System.out.print(ANSI_YELLOW);
+            System.out.println("CHECKMATE!");
             System.out.print(ANSI_GREEN);
-            System.out.println("Check!");
+            System.out.println("Winner: " + chessMatch.getCurrentPlayer());
             System.out.print(ANSI_RESET);
         }
     }
